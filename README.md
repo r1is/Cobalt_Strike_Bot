@@ -10,6 +10,7 @@ $feishu_url = 'https://open.feishu.cn/open-apis/bot/v2/hook/092e2219-726f-4202-8
 
 ## 服务端部署
 
+此脚本依赖`curl`命令，请确保cs服务端已安装了`curl`
 ```bash
 ./agscript [IP] [PORT] [UserName] [PassWord] [cna_file_Path]
 ```
