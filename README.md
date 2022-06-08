@@ -14,4 +14,5 @@ $feishu_url = 'https://open.feishu.cn/open-apis/bot/v2/hook/092e2219-726f-4202-8
 ./agscript [IP] [PORT] [UserName] [PassWord] [cna_file_Path]
 ```
 ## 效果图
-<img width="373" alt="image" src="https://user-images.githubusercontent.com/21257485/172524312-11466b01-3bb4-4c68-a881-6caa60d4adaa.png">
+<img width="336" alt="image" src="https://user-images.githubusercontent.com/21257485/172524624-fe29121b-eb5b-48b9-a902-06f56e6a53ed.png">
+
