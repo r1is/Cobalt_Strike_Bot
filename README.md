@@ -8,5 +8,5 @@ CobaltStrike 上线通知，飞书群聊机器人通知
 ## 服务端部署
 
 ```bash
-./agscript [IP] [PORT] [UserName] [PassWord] 
+./agscript [IP] [PORT] [UserName] [PassWord] [cna_file_Path]
 ```
