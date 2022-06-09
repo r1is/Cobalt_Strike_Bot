@@ -10,6 +10,7 @@ $feishu_url = 'https://open.feishu.cn/open-apis/bot/v2/hook/092e2219-726f-4202-8
 <center>
 <img width="735" alt="image" src="https://user-images.githubusercontent.com/21257485/172523390-4bad37c6-7a31-4fe4-b2fe-a7bb5194cffc.png">
 </center>
+
 ## 服务端部署
 
 此脚本依赖`curl`命令，请确保cs服务端已安装了`curl`
